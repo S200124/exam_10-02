@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Assignment4" default="build-server" basedir=".">
+	<!-- The location to be used for class files -->
+	<property name="build.dir" location="${basedir}/build" />
+	<!-- The location for source files -->
+	<property name="src.dir" location="${basedir}/src" />
+	<!-- The location for jar files -->
+	<property name="lib.dir" location="${basedir}/lib" />
+	<property name="gen.dir" location="${basedir}/gen-src" />
+	<property name="packageServer" value="it.polito.dp2.WF.lab4.gen.server"/>
+	<property name="packageServer2" value="it.polito.dp2.WF.lab4.gen.server2"/>
+	<property name="packageClient1" value="it.polito.dp2.WF.lab4.gen.client1"/>
+	<property name="packageClient2" value="it.polito.dp2.WF.lab4.gen.client2"/>
+	<property name="packageClient3" value="it.polito.dp2.WF.lab4.gen.client3"/>
+	<property name="packageClient4" value="it.polito.dp2.WF.lab4.gen.client4"/>
+	<property name="packageRemoteService" value="it.polito.dp2.WF.lab4.gen.packageRemoteService"/>
+	<property name="WSDL" value="${basedir}/wsdl"/>
+	<property name="WSDL_URL1" value="http://localhost:7071/wfinfo?wsdl"/>
+	<property name="WSDL_URL2" value="http://localhost:7070/wfcontrol?wsdl"/>
+	<property name="WSDL_URL0" value="http://localhost:8181/WorkflowInfoService?wsdl"/>
+	<property name="WSDL_URL3" value="http://localhost:7081/wfinfo?wsdl"/>
+	<property name="WSDL_URL4" value="http://localhost:7080/wfcontrol?wsdl"/>
+
+	<property name="debug" value="true" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.7" />
+	<property name="source" value="1.7" />
+
+	<path id="WF.classpath">
+		<pathelement location="${lib.dir}/WF.jar"/>
+	</path>
+
+	<path id="sol.classpath">
+		<pathelement location="${lib.dir}/WF.jar"/>
+	</path>
+	
+	<target name="init">
+		<mkdir dir="${gen.dir}" />
+	</target>
+
+	<target name="generate-artifacts-server" unless="generate-artifacts.notRequired" depends="init">
+	    <exec executable="wsimport">
+	        <arg line="-d '${build.dir}' -p '${packageServer}' -s '${gen.dir}' -keep ${WSDL}/Workflow.wsdl"/>
+	    </exec>
+	</target>
+	
+		<target name="generate-artifacts-server2" unless="generate-artifacts.notRequired" depends="init">
+	    <exec executable="wsimport">
+	        <arg line="-d '${build.dir}' -p '${packageServer2}' -s '${gen.dir}' -keep ${WSDL}/Workflow2.wsdl"/>
+	    </exec>
+	</target>
+
+	<target name="generate-artifacts-client1" unless="generate-artifacts.notRequired" depends="init">
+	    <exec executable="wsimport">
+	        <arg line="-d '${build.dir}' -p '${packageClient1}' -s '${gen.dir}' -keep ${WSDL_URL1}"/>
+	    </exec>
+	</target>
+
+	<target name="generate-artifacts-client2" unless="generate-artifacts.notRequired" depends="init">
+	    <exec executable="wsimport">
+	        <arg line="-d '${build.dir}' -p '${packageClient2}' -s '${gen.dir}' -keep ${WSDL_URL2}"/>
+	    </exec>
+	</target>
+	
+		<target name="generate-artifacts-client3" unless="generate-artifacts.notRequired" depends="init">
+	    <exec executable="wsimport">
+	        <arg line="-d '${build.dir}' -p '${packageClient3}' -s '${gen.dir}' -keep ${WSDL_URL3}"/>
+	    </exec>
+	</target>
+
+	<target name="generate-artifacts-client4" unless="generate-artifacts.notRequired" depends="init">
+	    <exec executable="wsimport">
+	        <arg line="-d '${build.dir}' -p '${packageClient4}' -s '${gen.dir}' -keep ${WSDL_URL4}"/>
+	    </exec>
+	</target>
+	
+	<target name="generate-artifacts-remoteService" unless="generate-artifacts.notRequired" depends="init">
+	    <exec executable="wsimport">
+	        <arg line="-d '${build.dir}' -p '${packageRemoteService}' -s '${gen.dir}' -keep ${WSDL_URL0}"/>
+	    </exec>
+	</target>
+
+	<target name="build-server" depends="init, generate-artifacts-server, generate-artifacts-server2" description="Build the server">
+		<javac 
+			destdir="${build.dir}"
+			debug="${debug}"
+			debuglevel="${debuglevel}"
+			source="${source}"
+			target="${target}"
+			includeantruntime="false">
+				<src path="${src.dir}" />
+				<include name="it/polito/dp2/WF/sol4/server/**" />
+				<include name="it/polito/dp2/WF/sol4/server2/**" />
+				<include name="it/polito/dp2/WF/lab4/*.java" />
+				<include name="it/polito/dp2/WF/lab1/*.java" />
+				<classpath>
+					<path refid="WF.classpath" />
+				</classpath>
+		</javac>
+	</target>
+
+	<target name="build-client" depends="init, generate-artifacts-client1, generate-artifacts-client2" description="Build your clients">
+		<javac destdir="${build.dir}" debug="${debug}" debuglevel="${debuglevel}" source="${source}" target="${target}" includeantruntime="false">
+			<src path="${src.dir}"/>
+			<src path="${gen.dir}"/>
+			<include name="it/polito/dp2/WF/sol4/client1/**" />
+			<include name="it/polito/dp2/WF/sol4/client2/**" />
+			<include name="it/polito/dp2/WF/lab4/*.java" />
+			<include name="it/polito/dp2/WF/lab1/*.java" />
+			<classpath>
+				<path refid="sol.classpath" />
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="build-test2-clients" depends="init, generate-artifacts-client3, generate-artifacts-client4" description="Build your clients">
+		<javac destdir="${build.dir}" debug="${debug}" debuglevel="${debuglevel}" source="${source}" target="${target}" includeantruntime="false">
+			<src path="${src.dir}"/>
+			<src path="${gen.dir}"/>
+			<include name="it/polito/dp2/WF/sol4/client3/**" />
+			<include name="it/polito/dp2/WF/sol4/client4/**" />
+			<include name="it/polito/dp2/WF/lab4/*.java" />
+			<include name="it/polito/dp2/WF/lab1/*.java" />
+			<classpath>
+				<path refid="sol.classpath" />
+				<pathelement path="${lib.dir}/lab3.jar" />
+			</classpath>
+		</javac>
+	</target>
+	
+
+</project>

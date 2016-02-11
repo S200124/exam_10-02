@@ -1,0 +1,4 @@
+Workflows are identified by their name (it is unique).
+The class (and procedure inside that) that check workflow and create new processes is a synchronized class, so only one thread at time can create a process.
+If a thread are creating a new workflow, the other are blocked. When the first thread have finished to create the new workflow and the new process, other thread enter
+in the "createProcessInWorkflow" procedure and seen that the workflow they are search is present yet.

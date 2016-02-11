@@ -1,0 +1,32 @@
+Distributed Programming II (A.Y. 2015/16)
+======================================================
+
+Final Test 2
+----------------
+
+This archive contains:
+
+- README            This file
+
+- Assignment4a.pdf  The text of assignment 4 part a
+
+- Assignment4b.pdf  The text of assignment 4 part b
+
+- FinalTest2.pdf  The text of the final test
+
+- build.xml         Ant file to run server, client, and test programs (the same of Assignment 4)
+
+- buildTest2.xml    Ant file to run the final tests and to make the final zip file.
+					Note: the only targets to be run in buildTest2,xml are run-final-test and make-final-zip.
+
+- lib               A directory containing the jars needed for this
+                    assignment
+
+- src               The directory where you must put your source code and where you find given source code
+
+- wsdl              The directory where you must put your WSDL files
+
+- custom		    A directory where you can put your customization binding files
+
+
+
