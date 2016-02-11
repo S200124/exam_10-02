@@ -27,28 +27,6 @@ public interface WorkflowManaging {
 
     /**
      * 
-     * @param takenOverAction
-     * @return
-     *     returns it.polito.dp2.WF.lab4.gen.client2.ActionStatusType
-     * @throws SystemErrorException
-     * @throws AlreadyTakenOrDifferentRoleErrorException
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "takeAction", targetNamespace = "http://pad.polito.it/ws/Workflow/", className = "it.polito.dp2.WF.lab4.gen.client2.TakeAction")
-    @ResponseWrapper(localName = "takeActionResponse", targetNamespace = "http://pad.polito.it/ws/Workflow/", className = "it.polito.dp2.WF.lab4.gen.client2.TakeActionResponse")
-    @Action(input = "http://pad.polito.it/ws/Workflow/WorkflowManaging/takeActionRequest", output = "http://pad.polito.it/ws/Workflow/WorkflowManaging/takeActionResponse", fault = {
-        @FaultAction(className = AlreadyTakenOrDifferentRoleErrorException.class, value = "http://pad.polito.it/ws/Workflow/WorkflowManaging/takeAction/Fault/AlreadyTakenOrDifferentRoleError_Exception"),
-        @FaultAction(className = SystemErrorException.class, value = "http://pad.polito.it/ws/Workflow/WorkflowManaging/takeAction/Fault/SystemError_Exception")
-    })
-    public ActionStatusType takeAction(
-        @WebParam(name = "takenOverAction", targetNamespace = "")
-        TakenOverActionType takenOverAction)
-        throws AlreadyTakenOrDifferentRoleErrorException, SystemErrorException
-    ;
-
-    /**
-     * 
      * @param workflowName
      * @throws SystemErrorException
      */
@@ -62,6 +40,28 @@ public interface WorkflowManaging {
         @WebParam(name = "workflowName", targetNamespace = "")
         String workflowName)
         throws SystemErrorException
+    ;
+
+    /**
+     * 
+     * @param takenOverAction
+     * @return
+     *     returns it.polito.dp2.WF.lab4.gen.client2.ActionStatusType
+     * @throws AlreadyTakenOrDifferentRoleErrorException
+     * @throws SystemErrorException
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "takeAction", targetNamespace = "http://pad.polito.it/ws/Workflow/", className = "it.polito.dp2.WF.lab4.gen.client2.TakeAction")
+    @ResponseWrapper(localName = "takeActionResponse", targetNamespace = "http://pad.polito.it/ws/Workflow/", className = "it.polito.dp2.WF.lab4.gen.client2.TakeActionResponse")
+    @Action(input = "http://pad.polito.it/ws/Workflow/WorkflowManaging/takeActionRequest", output = "http://pad.polito.it/ws/Workflow/WorkflowManaging/takeActionResponse", fault = {
+        @FaultAction(className = AlreadyTakenOrDifferentRoleErrorException.class, value = "http://pad.polito.it/ws/Workflow/WorkflowManaging/takeAction/Fault/AlreadyTakenOrDifferentRoleError_Exception"),
+        @FaultAction(className = SystemErrorException.class, value = "http://pad.polito.it/ws/Workflow/WorkflowManaging/takeAction/Fault/SystemError_Exception")
+    })
+    public ActionStatusType takeAction(
+        @WebParam(name = "takenOverAction", targetNamespace = "")
+        TakenOverActionType takenOverAction)
+        throws AlreadyTakenOrDifferentRoleErrorException, SystemErrorException
     ;
 
     /**

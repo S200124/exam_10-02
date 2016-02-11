@@ -33,7 +33,7 @@ public final class WorkFlowModel {
 			
 			try {
 				List<WorkflowType> ret = proxy.getWorkflows(hs);
-				time.value = hs.value;
+				time = hs;
 				return ret;
 			} catch (SystemErrorException e) {
 				// TODO Auto-generated catch block
@@ -66,7 +66,7 @@ public final class WorkFlowModel {
 			
 			try {
 				List<ProcessType> ret = proxy.getProcesses(hs);
-				time.value = hs.value;
+				time = hs;
 				return ret;
 			} catch (SystemErrorException e) {
 				// TODO Auto-generated catch block

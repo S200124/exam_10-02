@@ -29,7 +29,7 @@ public class WorkflowSearchingImpl implements WorkflowSearching {
 	@Override
 	@WebMethod
 	@WebResult(targetNamespace = "")
-	@RequestWrapper(localName = "getProcesses", targetNamespace = "http://pad.polito.it/ws/Workflow/", className = "it.polito.dp2.WF.lab4.gen.server2.GetProcesses")
+	@RequestWrapper(localName = "getProcesses", targetNamespace = "http://pad.polito.it/ws/Workflow/", className = "it.polito.dp2.WF.lab4.gen.GetProcesses")
 	@ResponseWrapper(localName = "getProcessesResponse", targetNamespace = "http://pad.polito.it/ws/Workflow/", className = "it.polito.dp2.WF.lab4.gen.server2.GetProcessesResponse")
 	public List<WorkflowType> getWorkflows(Holder<String> lastModification)
 			throws SystemError_Exception {
@@ -40,7 +40,7 @@ public class WorkflowSearchingImpl implements WorkflowSearching {
 	@Override
 	@WebMethod
 	@WebResult(targetNamespace = "")
-	@RequestWrapper(localName = "getWorkflows", targetNamespace = "http://pad.polito.it/ws/Workflow/", className = "it.polito.dp2.WF.lab4.gen.server2.GetWorkflows")
+	@RequestWrapper(localName = "getWorkflows", targetNamespace = "http://pad.polito.it/ws/Workflow/", className = "it.polito.dp2.WF.lab4.gen.GetWorkflows")
 	@ResponseWrapper(localName = "getWorkflowsResponse", targetNamespace = "http://pad.polito.it/ws/Workflow/", className = "it.polito.dp2.WF.lab4.gen.server2.GetWorkflowsResponse")
 	public List<ProcessType> getProcesses(Holder<String> lastModification)
 			throws SystemError_Exception {

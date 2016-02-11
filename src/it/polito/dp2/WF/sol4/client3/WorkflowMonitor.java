@@ -1,6 +1,5 @@
 package it.polito.dp2.WF.sol4.client3;
 
-import it.polito.dp2.WF.lab3.Refreshable;
 import it.polito.dp2.WF.lab4.gen.client3.ProcessType;
 import it.polito.dp2.WF.lab4.gen.client3.WorkflowType;
 
@@ -9,19 +8,21 @@ import java.util.*;
 import javax.xml.ws.Holder;
 
 
-public class WorkflowMonitor implements it.polito.dp2.WF.WorkflowMonitor, Refreshable {
+public class WorkflowMonitor implements it.polito.dp2.WF.WorkflowMonitor {
 	
 	private List<WorkflowType> wfl;
 	private String lastMod;
 	
 	public WorkflowMonitor() {
-		refresh();
+		Holder<String> time = new Holder<String>();
+		wfl = WorkFlowModel.allWorkflow(time);
+		lastMod = time.value;
 	}
 
 	@Override
 	public Set<it.polito.dp2.WF.ProcessReader> getProcesses() {
 		Set<it.polito.dp2.WF.ProcessReader> ret = new HashSet<it.polito.dp2.WF.ProcessReader>();
-
+		
 		for(WorkflowType wf:wfl)
 			for(ProcessType pr:wf.getProcess())
 				ret.add(new ProcessReader(pr, wf));
@@ -40,18 +41,11 @@ public class WorkflowMonitor implements it.polito.dp2.WF.WorkflowMonitor, Refres
 	@Override
 	public Set<it.polito.dp2.WF.WorkflowReader> getWorkflows() {
 		Set<it.polito.dp2.WF.WorkflowReader> ret = new HashSet<it.polito.dp2.WF.WorkflowReader>();
-
+		
 		for(WorkflowType wf:wfl)
 			ret.add(new WorkflowReader(wf));
 		
 		return ret;
-	}
-
-	@Override
-	public void refresh() {
-		Holder<String> time = new Holder<String>();
-		wfl = WorkFlowModel.allWorkflow(time);
-		lastMod = time.value;
 	}
 	
 }

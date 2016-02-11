@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "WorkflowManaging", targetNamespace = "http://pad.polito.it/ws/Workflow/", wsdlLocation = "file:/home/alessandro/Workspace/exam/wsdl/Workflow2.wsdl")
+@WebServiceClient(name = "WorkflowManaging", targetNamespace = "http://pad.polito.it/ws/Workflow/", wsdlLocation = "file:/Z:/DP2_10-02-2016/exam/wsdl/Workflow2.wsdl")
 public class WorkflowManaging_Service
     extends Service
 {
@@ -30,7 +30,7 @@ public class WorkflowManaging_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/home/alessandro/Workspace/exam/wsdl/Workflow2.wsdl");
+            url = new URL("file:/Z:/DP2_10-02-2016/exam/wsdl/Workflow2.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
